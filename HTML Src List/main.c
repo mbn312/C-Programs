@@ -38,18 +38,23 @@ int main(void) {
 		//the user input will trigger a corresponding function
 		switch (command[0]) {
 		case 'c':
+		case 'C':
 			count(ptr);
 			break;
 		case 't':
+		case 'T':
 			tags(ptr);
 			break;
 		case 'u':
+		case 'U':
 			urls(ptr);
 			break;
 		case 'f':
+		case 'F':
 			frequencies(ptr);
 			break;
 		case 'q':
+		case 'Q':
 			printf("Complete\n");
 			break;
 		case '*':
