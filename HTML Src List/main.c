@@ -7,6 +7,8 @@ void count(char *file);
 void urls(char *file);
 void tags(char *file);
 void frequencies(char *file);
+void printCommands();
+void printTitle();
 
 int main(void) {
 	setvbuf(stdout, NULL, _IONBF, 0);
@@ -15,7 +17,8 @@ int main(void) {
 	char url[BUFSIZ] = "curl -s ";
 	char file[2 * BUFSIZ];
 	char command[BUFSIZ];
-	printf("URL:\n");
+	printTitle();
+	printf("\nEnter URL:");
 	fgets(buffer, BUFSIZ, stdin);
 	rewind(stdin);
 	strcat(url, buffer);
@@ -29,7 +32,7 @@ int main(void) {
 	//will loop until the user inputs 'q' into the standard input
 	do {
 		char *ptr = file;
-		printf("Ready\n");
+		printf("Enter Command ( * - print command list):\n");
 		fgets(command, BUFSIZ, stdin);
 		rewind(stdin);
 		//the user input will trigger a corresponding function
@@ -49,10 +52,36 @@ int main(void) {
 		case 'q':
 			printf("Complete\n");
 			break;
+		case '*':
+			printCommands();
+			break;
+		default:
+			break;
 		}
 	} while (command[0] != 'q');
 	return EXIT_SUCCESS;
 }
+
+void printTitle() {
+	printf("\n================================================================\n");
+	printf("\n\t HTML Src List\n\n");
+	printf("================================================================\n\n");
+}
+
+void printCommands() {
+	printf("\n----------------------------------------------------------------\n");
+	printf("   Commands:\n");
+	printf("----------------------------------------------------------------\n");
+	printf("\t* - Get Commands\n");
+	printf("\tc - Get Count\n");
+	printf("\tt - Get Tags\n");
+	printf("\tu - Get URLs\n");
+	printf("\t* - Get All Contacts\n");
+	printf("\tf - Get Frequencies\n");
+	printf("\tq - Quit\n");
+	printf("----------------------------------------------------------------\n");
+}
+
 //count function goes through and looks for src=" and if it is valid, it will increase count by one.
 void count(char *file) {
 	int count = 0;
